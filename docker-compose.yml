@@ -1,0 +1,44 @@
+services:
+
+  user_tg_bot:
+    container_name: user_tg_bot
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    env_file:
+      - .env
+    restart: always
+    volumes:
+      - ./app:/src/app
+    command: "poetry run python -m app.bot.main"
+    networks:
+      - backend_network
+      
+  backend_postgres:
+    image: postgres:18-alpine
+    container_name: backend_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: database
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - backend_network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "user", "-d", "database"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  user_tg_bot:
+  pgdata:
+
+networks:
+  backend_network:
+    name: backend_network
+    driver: bridge
