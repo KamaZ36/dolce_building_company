@@ -1,5 +1,8 @@
 from dishka import Provider, provide, Scope
 
+from app.application.interactors.completed_project.get_list import (
+    GetCompletedProjectsListInteractor,
+)
 from app.application.interactors.general.get_contact_info import (
     GetContactInfoInteractor,
 )
@@ -21,3 +24,6 @@ class InteractorsPorivder(Provider):
 
     # GENERAL
     get_settings = provide(GetContactInfoInteractor)
+
+    # COMPLETED PROJECTS
+    get_completed_projects_list = provide(GetCompletedProjectsListInteractor)

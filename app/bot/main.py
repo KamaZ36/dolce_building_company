@@ -10,6 +10,7 @@ from app.bot.handlers import (
     command_start_router,
     house_show_router,
     contact_info_router,
+    completed_projects_show_router,
 )
 
 
@@ -17,6 +18,7 @@ def add_routers(dp: Dispatcher) -> None:
     dp.include_router(command_start_router)
     dp.include_router(house_show_router)
     dp.include_router(contact_info_router)
+    dp.include_router(completed_projects_show_router)
 
 
 async def main() -> None:

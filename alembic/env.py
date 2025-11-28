@@ -6,6 +6,9 @@ from app.core.config import settings
 from app.infrasructure.database.models.settings import SettingsModel
 from app.infrasructure.database.models.user import UserModel
 from app.infrasructure.database.models.house import HouseModel, HousePhotoModel
+from app.infrasructure.database.models.completed_projects import (
+    CompletedProjectsPhotoModel,
+)
 from app.infrasructure.database.models.base import BaseModel
 
 from sqlalchemy import pool

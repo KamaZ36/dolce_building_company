@@ -2,6 +2,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from dishka import Provider, Scope, provide
 
+from app.infrasructure.repositories.completed_projects.base import (
+    BaseCompletedProjectsRepository,
+)
+from app.infrasructure.repositories.completed_projects.sqlalchemy_repository import (
+    SQLAlchemyCompletedProjectsRepository,
+)
 from app.infrasructure.repositories.house.base import BaseHouseRepository
 from app.infrasructure.repositories.house.sqlalchemy_repository import (
     SQLHouseRepository,
@@ -28,3 +34,9 @@ class RepositoriesProvider(Provider):
     @provide
     def get_settings_repository(self, session: AsyncSession) -> BaseSettingsRepository:
         return SQLalchemySettingsRepository(session)
+
+    @provide
+    def get_completed_project_repository(
+        self, session: AsyncSession
+    ) -> BaseCompletedProjectsRepository:
+        return SQLAlchemyCompletedProjectsRepository(session)
