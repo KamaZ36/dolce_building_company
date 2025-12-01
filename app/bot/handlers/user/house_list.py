@@ -23,8 +23,6 @@ async def show_house_by_offset(
     if info_msg_id:
         await bot.delete_message(chat_id=user_id, message_id=info_msg_id)
 
-    print(current_offset)
-
     async with container() as req_container:
         filters = GetHouseListFilters(limit=1, offset=current_offset)
         interactor = await req_container.get(GetHouseListInteractor)
@@ -33,8 +31,8 @@ async def show_house_by_offset(
     house = result.houses[0]
 
     media = [InputMediaPhoto(media=photo) for photo in house.photos]
-
     media_group = await bot.send_media_group(media=media, chat_id=user_id)
+
     msg = await bot.send_message(
         **HouseCardMessage(
             house=house, total_count=result.total_houses, current_offset=current_offset

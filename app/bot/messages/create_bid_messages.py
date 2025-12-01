@@ -13,7 +13,7 @@ class GetNumberFloorsMessage(BaseMessage):
                 InlineKeyboardButton(text="2", callback_data="bid:floors:2"),
             ],
             [
-                InlineKeyboardButton(text="3", callback_data="bid:floor:3"),
+                InlineKeyboardButton(text="3", callback_data="bid:floors:3"),
             ],
         ]
     )
